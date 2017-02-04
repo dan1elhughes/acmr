@@ -27,6 +27,30 @@ public class Controller {
 		this.reducerClass = reducerClass;
 	}
 
+	public void run() throws Exception {
+		String line;
+		BufferedReader input = this.input;
+
+		Mappable mapper = this.mapperClass.getConstructor().newInstance();
+		while ((line = input.readLine()) != null) {
+			mapper.setInput(line);
+
+			ArrayList<KVPair> results = mapper.call();
+			this.appendMapResults(results);
+		}
+
+		Reducible reducer = this.reducerClass.getConstructor().newInstance();
+		for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
+			reducer.setData(entry.getKey(), entry.getValue());
+
+			KVPair result = reducer.call();
+			this.appendReduceResult(result);
+		}
+
+		this.finish();
+
+	}
+
 	private void finish() {
 		String contents = "";
 
@@ -48,4 +72,19 @@ public class Controller {
 		this.output = output;
 	}
 
+	public void appendMapResults(ArrayList<KVPair> results) {
+		for (KVPair result : results) {
+
+			ArrayList<String> values = this.mapResults.get(result.getKey());
+			if (values == null) {
+				this.mapResults.put(result.getKey(), new ArrayList<>());
+			}
+
+			this.mapResults.get(result.getKey()).add(result.getValue());
+		}
+	}
+
+	public void appendReduceResult(KVPair result) {
+		this.reduceResults.put(result.getKey(), result.getValue());
+	}
 }
