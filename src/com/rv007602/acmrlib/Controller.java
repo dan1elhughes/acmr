@@ -27,6 +27,22 @@ public class Controller {
 		this.reducerClass = reducerClass;
 	}
 
+	private void finish() {
+		String contents = "";
+
+		for (HashMap.Entry<String, String> result : this.reduceResults.entrySet()) {
+			KVPair kvp = new KVPair(result.getKey(), result.getValue());
+			contents += String.format("%s\n", kvp);
+		}
+
+		try {
+			BufferedWriter output = this.output;
+			output.write(contents);
+			output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void setOutput(BufferedWriter output) {
 		this.output = output;
