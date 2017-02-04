@@ -16,7 +16,7 @@ public class Main {
 		controller.setReducer(Reducer.class);
 
 		BufferedReader input = new BufferedReader(new FileReader("data.txt"));
-		BufferedWriter output = new BufferedWriter(new FileWriter("output.txt"));
+		BufferedWriter output = new BufferedWriter(new FileWriter("output/output.txt"));
 		controller.setInput(input);
 		controller.setOutput(output);
 
