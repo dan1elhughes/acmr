@@ -72,7 +72,7 @@ public class Controller {
 		this.output = output;
 	}
 
-	public void appendMapResults(ArrayList<KVPair> results) {
+	private void appendMapResults(ArrayList<KVPair> results) {
 		for (KVPair result : results) {
 
 			ArrayList<String> values = this.mapResults.get(result.getKey());
@@ -84,7 +84,7 @@ public class Controller {
 		}
 	}
 
-	public void appendReduceResult(KVPair result) {
+	private void appendReduceResult(KVPair result) {
 		this.reduceResults.put(result.getKey(), result.getValue());
 	}
 }
