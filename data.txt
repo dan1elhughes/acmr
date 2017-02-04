@@ -1,0 +1,8 @@
+hello world
+this is some sample data for a word count application.
+it should give back a list of most common words sorted by frequency.
+
+here's some apostrophes to see if they break it.
+"it's don't can't won't".
+
+the word THE will be the most common. it's in caps to check that it counts uppercase THE too.
