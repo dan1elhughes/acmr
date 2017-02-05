@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class Main {
+class Main {
 
 	public static void main(String[] args) throws Exception {
 		Controller controller = new Controller();
@@ -23,4 +23,3 @@ public class Main {
 		controller.run();
 	}
 }
-
