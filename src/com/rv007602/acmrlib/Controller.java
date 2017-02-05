@@ -27,28 +27,43 @@ public class Controller {
 		this.reducerClass = reducerClass;
 	}
 
-	public void run() throws Exception {
+	public void run() {
+		this.map();
+		this.reduce();
+		this.finish();
+	}
+
+	private void map() {
 		String line;
 		BufferedReader input = this.input;
+		Mappable mapper;
 
-		Mappable mapper = this.mapperClass.getConstructor().newInstance();
-		while ((line = input.readLine()) != null) {
-			mapper.setInput(line);
+		try {
+			mapper = this.mapperClass.getConstructor().newInstance();
+			while ((line = input.readLine()) != null) {
+				mapper.setInput(line);
 
-			ArrayList<KVPair> results = mapper.call();
-			this.appendMapResults(results);
+				ArrayList<KVPair> results = mapper.call();
+				this.appendMapResults(results);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 
-		Reducible reducer = this.reducerClass.getConstructor().newInstance();
-		for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
-			reducer.setData(entry.getKey(), entry.getValue());
+	private void reduce() {
+		Reducible reducer;
+		try {
+			reducer = this.reducerClass.getConstructor().newInstance();
+			for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
+				reducer.setData(entry.getKey(), entry.getValue());
 
-			KVPair result = reducer.call();
-			this.appendReduceResult(result);
+				KVPair result = reducer.call();
+				this.appendReduceResult(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		this.finish();
-
 	}
 
 	private void finish() {
