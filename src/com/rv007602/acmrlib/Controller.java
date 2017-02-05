@@ -12,8 +12,8 @@ public class Controller {
 	private Class<? extends Reducible> reducerClass;
 	private BufferedReader input;
 	private BufferedWriter output;
-	private HashMap<String, ArrayList<String>> mapResults = new HashMap<>();
-	private HashMap<String, String> reduceResults = new HashMap<>();
+	private final HashMap<String, ArrayList<String>> mapResults = new HashMap<>();
+	private final HashMap<String, String> reduceResults = new HashMap<>();
 
 	public void setInput(BufferedReader input) {
 		this.input = input;
