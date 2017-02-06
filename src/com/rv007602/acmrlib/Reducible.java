@@ -15,6 +15,7 @@ public abstract class Reducible implements Callable {
 	}
 
 	public KVPair call() {
+		System.out.println("Reduce { " + this.key + " , " + values.size() + " values } :: " + Thread.currentThread().getName());
 		return this.reduce(this.key, this.values);
 	}
 }

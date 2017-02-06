@@ -13,6 +13,7 @@ public abstract class Mappable implements Callable {
 	}
 
 	public ArrayList<KVPair> call() {
+		System.out.println("Map { " + this.line + " } :: " + Thread.currentThread().getName());
 		return this.map(this.line);
 	}
 }

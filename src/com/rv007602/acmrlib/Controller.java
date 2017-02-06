@@ -3,17 +3,23 @@ package com.rv007602.acmrlib;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Controller {
 
+	private final HashMap<String, ArrayList<String>> mapResults = new HashMap<>();
+	private final HashMap<String, String> reduceResults = new HashMap<>();
 	private Class<? extends Mappable> mapperClass;
 	private Class<? extends Reducible> reducerClass;
 	private BufferedReader input;
 	private BufferedWriter output;
-	private final HashMap<String, ArrayList<String>> mapResults = new HashMap<>();
-	private final HashMap<String, String> reduceResults = new HashMap<>();
 
 	public void setInput(BufferedReader input) {
 		this.input = input;
@@ -28,42 +34,58 @@ public class Controller {
 	}
 
 	public void run() {
-		this.map();
-		this.reduce();
-		this.finish();
+		try {
+			this.map();
+			this.reduce();
+			this.finish();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void map() {
+	private void map() throws Exception {
 		String line;
 		BufferedReader input = this.input;
-		Mappable mapper;
+		Constructor constructor = this.mapperClass.getConstructor();
 
-		try {
-			mapper = this.mapperClass.getConstructor().newInstance();
-			while ((line = input.readLine()) != null) {
-				mapper.setInput(line);
+		int cpuThreads = Runtime.getRuntime().availableProcessors();
+		ExecutorService pool = Executors.newFixedThreadPool(cpuThreads);
+		Set<Future<ArrayList<KVPair>>> set = new HashSet<>();
 
-				ArrayList<KVPair> results = mapper.call();
-				this.appendMapResults(results);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		while ((line = input.readLine()) != null) {
+			Mappable mapper = (Mappable) constructor.newInstance();
+			mapper.setInput(line);
+			Future f = pool.submit(mapper);
+			set.add(f);
 		}
+
+		for (Future<ArrayList<KVPair>> future : set) {
+			this.appendMapResults(future.get());
+		}
+
+		pool.shutdown();
 	}
 
-	private void reduce() {
-		Reducible reducer;
-		try {
-			reducer = this.reducerClass.getConstructor().newInstance();
-			for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
-				reducer.setData(entry.getKey(), entry.getValue());
+	private void reduce() throws Exception {
+		Constructor constructor = this.reducerClass.getConstructor();
 
-				KVPair result = reducer.call();
-				this.appendReduceResult(result);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		int cpuThreads = Runtime.getRuntime().availableProcessors();
+		ExecutorService pool = Executors.newFixedThreadPool(cpuThreads);
+		Set<Future<KVPair>> set = new HashSet<>();
+
+		for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
+			Reducible reducer = (Reducible) constructor.newInstance();
+			reducer.setData(entry.getKey(), entry.getValue());
+
+			Future f = pool.submit(reducer);
+			set.add(f);
 		}
+
+		for (Future<KVPair> future : set) {
+			this.appendReduceResult(future.get());
+		}
+
+		pool.shutdown();
 	}
 
 	private void finish() {
