@@ -13,11 +13,15 @@ public class Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
+		String valid = "[A-Z]{3}[0-9]{4}[A-Z]";
+
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		String flightID = attributes[1];
 
-		results.add(new KVPair(flightID, String.valueOf(1)));
+		if (flightID.matches(valid)) {
+			results.add(new KVPair(flightID, String.valueOf(1)));
+		}
 
 		return results;
 	}
