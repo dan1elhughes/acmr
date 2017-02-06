@@ -1,6 +1,6 @@
-package com.rv007602.acmr;
+package com.rv007602.acmr.wordcount;
 
-import com.rv007602.acmrlib.Controller;
+import com.rv007602.acmr.lib.Controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

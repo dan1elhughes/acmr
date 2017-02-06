@@ -1,7 +1,7 @@
-package com.rv007602.acmr;
+package com.rv007602.acmr.wordcount;
 
-import com.rv007602.acmrlib.KVPair;
-import com.rv007602.acmrlib.Reducible;
+import com.rv007602.acmr.lib.KVPair;
+import com.rv007602.acmr.lib.Reducible;
 
 import java.util.ArrayList;
 

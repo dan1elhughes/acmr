@@ -1,4 +1,4 @@
-package com.rv007602.acmrlib;
+package com.rv007602.acmr.lib;
 
 public class KVPair {
 	private final String key;

@@ -1,4 +1,4 @@
-package com.rv007602.acmrlib;
+package com.rv007602.acmr.lib;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
