@@ -15,7 +15,7 @@ public class Flights_Mapper extends Mappable {
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		if (attributes.length > 0) {
+		if (attributes[0] != line) {
 			// TODO: Check validity before adding result
 			String airport = attributes[2];
 			String flight = attributes[1];

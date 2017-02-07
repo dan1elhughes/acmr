@@ -18,7 +18,7 @@ public class Mapper extends Mappable {
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		if (attributes.length > 0) {
+		if (attributes[0] != line) {
 			String flightID = attributes[1];
 
 			if (flightID.matches(valid)) {
