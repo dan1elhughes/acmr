@@ -8,11 +8,12 @@ import java.util.ArrayList;
 public class Airports_Reducer extends Reducible {
 	@Override
 	protected KVPair reduce(String key, ArrayList<String> values) {
-		String val = "";
+		int count = 0;
 
-		for (String value : values) {
-			val += value;
+		for (String val : values) {
+			count += Integer.parseInt(val, 10);
 		}
-		return new KVPair(key, val);
+
+		return new KVPair(key, String.valueOf(count));
 	}
 }
