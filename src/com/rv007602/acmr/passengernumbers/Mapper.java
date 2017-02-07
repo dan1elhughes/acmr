@@ -14,14 +14,14 @@ public class Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String valid = "[A-Z]{3}[0-9]{4}[A-Z]";
+		String flightValid = "[A-Z]{3}[0-9]{4}[A-Z]";
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes[0] != line) {
 			String flightID = attributes[1];
 
-			if (flightID.matches(valid)) {
+			if (flightID.matches(flightValid)) {
 				results.add(new KVPair(flightID, String.valueOf(1)));
 			}
 		}

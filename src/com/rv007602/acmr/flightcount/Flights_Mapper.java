@@ -13,14 +13,20 @@ public class Flights_Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
+		String codeValid = "[A-Z]{3}";
+		String flightValid = "[A-Z]{3}[0-9]{4}[A-Z]";
+
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes[0] != line) {
 			// TODO: Check validity before adding result
-			String airport = attributes[2];
 			String flight = attributes[1];
+			String code = attributes[2];
 
-			results.add(new KVPair(airport, flight));
+			if (code.matches(codeValid) && flight.matches(flightValid)) {
+				results.add(new KVPair(code, flight));
+			}
+
 		}
 
 		return results;

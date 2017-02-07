@@ -15,12 +15,18 @@ public class Totals_Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String code = attributes[0];
-		String subtotal = attributes[1];
+		String codeValid = "[A-Z]{3}";
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		results.add(new KVPair(code, subtotal));
+		if (attributes[0] != line) {
+			String code = attributes[0];
+			String subtotal = attributes[1];
+
+			if (code.matches(codeValid)) {
+				results.add(new KVPair(code, subtotal));
+			}
+		}
 
 		return results;
 	}
