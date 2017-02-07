@@ -14,14 +14,14 @@ public class Airports_Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String valid = "[A-Z]{3,20}";
+		String codeValid = "[A-Z]{3}";
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes.length > 0) {
 			String code = attributes[1];
 
-			if (code.matches(valid)) {
+			if (code.matches(codeValid)) {
 				results.add(new KVPair(code, String.valueOf(0)));
 			} else {
 				System.out.println(code);
