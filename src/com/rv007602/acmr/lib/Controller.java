@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -43,7 +45,7 @@ public class Controller {
 		}
 	}
 
-	private void map() throws Exception {
+	private void map() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InstantiationException, ExecutionException, InterruptedException {
 		String line;
 		BufferedReader input = this.input;
 		Constructor constructor = this.mapperClass.getConstructor();
@@ -66,7 +68,7 @@ public class Controller {
 		pool.shutdown();
 	}
 
-	private void reduce() throws Exception {
+	private void reduce() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, ExecutionException, InterruptedException {
 		Constructor constructor = this.reducerClass.getConstructor();
 
 		int cpuThreads = Runtime.getRuntime().availableProcessors();
@@ -88,7 +90,7 @@ public class Controller {
 		pool.shutdown();
 	}
 
-	private void finish() {
+	private void finish() throws IOException {
 		String contents = "";
 
 		for (HashMap.Entry<String, String> result : this.reduceResults.entrySet()) {
@@ -96,13 +98,9 @@ public class Controller {
 			contents += String.format("%s\n", kvp);
 		}
 
-		try {
-			BufferedWriter output = this.output;
-			output.write(contents);
-			output.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		BufferedWriter output = this.output;
+		output.write(contents);
+		output.close();
 	}
 
 	public void setOutput(BufferedWriter output) {
