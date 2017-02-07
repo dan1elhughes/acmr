@@ -15,12 +15,15 @@ public class Flights_Mapper extends Mappable {
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		// TODO: Check validity before adding result
-		String airport = attributes[2];
-		String flight = attributes[1];
+		if (attributes.length > 0) {
+			// TODO: Check validity before adding result
+			String airport = attributes[2];
+			String flight = attributes[1];
 
-		results.add(new KVPair(airport, flight));
+			results.add(new KVPair(airport, flight));
+		}
 
 		return results;
+
 	}
 }

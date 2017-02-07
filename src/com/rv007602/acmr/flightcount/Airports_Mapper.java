@@ -18,7 +18,7 @@ public class Airports_Mapper extends Mappable {
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		if (attributes.length > 1) {
+		if (attributes.length > 0) {
 			String code = attributes[1];
 
 			if (code.matches(valid)) {

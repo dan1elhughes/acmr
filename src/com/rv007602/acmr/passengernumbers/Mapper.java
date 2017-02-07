@@ -18,10 +18,12 @@ public class Mapper extends Mappable {
 
 		ArrayList<KVPair> results = new ArrayList<>();
 
-		String flightID = attributes[1];
+		if (attributes.length > 0) {
+			String flightID = attributes[1];
 
-		if (flightID.matches(valid)) {
-			results.add(new KVPair(flightID, String.valueOf(1)));
+			if (flightID.matches(valid)) {
+				results.add(new KVPair(flightID, String.valueOf(1)));
+			}
 		}
 
 		return results;
