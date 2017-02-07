@@ -9,6 +9,10 @@ public class Totals_Mapper extends Mappable {
 
 	@Override
 	protected ArrayList<KVPair> map(String line) {
+		// Headers	: Airport, Flights
+		// Line		: DEN,1
+		// Output	: <"DEN", "1">
+
 		String[] attributes = line.split(",");
 
 		String code = attributes[0];

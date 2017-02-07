@@ -10,6 +10,7 @@ public class Airports_Mapper extends Mappable {
 	protected ArrayList<KVPair> map(String line) {
 		// Headers	: Name, Code, Lat, Long
 		// Line		: ATLANTA,ATL,33.636719,-84.428067
+		// Output	: <ATL, "0">
 
 		String[] attributes = line.split(",");
 

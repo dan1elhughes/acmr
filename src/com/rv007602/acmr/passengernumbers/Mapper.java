@@ -10,6 +10,7 @@ public class Mapper extends Mappable {
 	protected ArrayList<KVPair> map(String line) {
 		// Headers	: Passenger, Flight, From, To, DepartedAt, Duration
 		// Line		: UES9151GS5,SQU6245R,DEN,FRA,1420564460,1049
+		// Output	: <SQU6245R, 1>
 
 		String[] attributes = line.split(",");
 

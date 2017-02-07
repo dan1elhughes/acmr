@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class Reducer extends Reducible {
 	@Override
 	protected KVPair reduce(String key, ArrayList<String> values) {
+		// Input	: key, <"1", "2">
+		// Output	: <key, "3">
+
 		int total = 0;
 
 		for (String count : values) {
