@@ -9,7 +9,7 @@ public abstract class Reducible implements Callable {
 
 	protected abstract KVPair reduce(String key, ArrayList<String> values);
 
-	public void setData(String key, ArrayList<String> values) {
+	void setData(String key, ArrayList<String> values) {
 		this.key = key;
 		this.values = values;
 	}

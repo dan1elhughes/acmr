@@ -8,7 +8,7 @@ public abstract class Mappable implements Callable {
 
 	protected abstract ArrayList<KVPair> map(String line);
 
-	public void setInput(String line) {
+	void setInput(String line) {
 		this.line = line;
 	}
 
