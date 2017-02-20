@@ -21,7 +21,7 @@ public class Main {
 		controller.setMapper(FlightDistance_Mapper.class);
 		controller.setReducer(FlightDistance_Reducer.class);
 
-		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data_no_error.csv"));
+		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data.csv"));
 		BufferedWriter output = new BufferedWriter(new FileWriter("output/flights.txt"));
 
 		controller.setInput(input);
@@ -37,7 +37,7 @@ public class Main {
 		controller.setMapper(PassengerDistance_Mapper.class);
 		controller.setReducer(FlightDistance_Reducer.class);
 
-		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data_no_error.csv"));
+		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data.csv"));
 		BufferedWriter output = new BufferedWriter(new FileWriter("output/passengers.txt"));
 
 		controller.setInput(input);
