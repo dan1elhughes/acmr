@@ -1,5 +1,6 @@
 package com.rv007602.acmr.flightdistance;
 
+import com.rv007602.acmr.Validate;
 import com.rv007602.acmr.lib.KVPair;
 import com.rv007602.acmr.lib.Mappable;
 
@@ -14,9 +15,6 @@ public class PassengerDistance_Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String codeValid = "[A-Z]{3}";
-		String passengerValid = "[A-Z]{3}[0-9]{4}[A-Z]{2}[0-9]";
-
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes[0] != line) {
@@ -24,7 +22,7 @@ public class PassengerDistance_Mapper extends Mappable {
 			String from = attributes[2];
 			String to = attributes[3];
 
-			if (from.matches(codeValid) && to.matches(codeValid) && passengerID.matches(passengerValid)) {
+			if (Validate.airport(from) && Validate.airport(to) && Validate.passenger(passengerID)) {
 				results.add(new KVPair(passengerID, from + "|" + to));
 			}
 		}

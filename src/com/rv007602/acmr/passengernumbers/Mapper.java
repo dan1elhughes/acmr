@@ -1,5 +1,6 @@
 package com.rv007602.acmr.passengernumbers;
 
+import com.rv007602.acmr.Validate;
 import com.rv007602.acmr.lib.KVPair;
 import com.rv007602.acmr.lib.Mappable;
 
@@ -14,14 +15,12 @@ public class Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String flightValid = "[A-Z]{3}[0-9]{4}[A-Z]";
-
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes[0] != line) {
 			String flightID = attributes[1];
 
-			if (flightID.matches(flightValid)) {
+			if (Validate.flight(flightID)) {
 				results.add(new KVPair(flightID, String.valueOf(1)));
 			}
 		}

@@ -1,5 +1,6 @@
 package com.rv007602.acmr.flightcount;
 
+import com.rv007602.acmr.Validate;
 import com.rv007602.acmr.lib.KVPair;
 import com.rv007602.acmr.lib.Mappable;
 
@@ -13,17 +14,13 @@ public class Flights_Mapper extends Mappable {
 
 		String[] attributes = line.split(",");
 
-		String codeValid = "[A-Z]{3}";
-		String flightValid = "[A-Z]{3}[0-9]{4}[A-Z]";
-
 		ArrayList<KVPair> results = new ArrayList<>();
 
 		if (attributes[0] != line) {
-			// TODO: Check validity before adding result
 			String flight = attributes[1];
 			String code = attributes[2];
 
-			if (code.matches(codeValid) && flight.matches(flightValid)) {
+			if (Validate.airport(code) && Validate.flight(flight)) {
 				results.add(new KVPair(code, flight));
 			}
 

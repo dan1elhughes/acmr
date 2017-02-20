@@ -1,5 +1,6 @@
 package com.rv007602.acmr.flightdistance;
 
+import com.rv007602.acmr.Validate;
 import com.rv007602.acmr.lib.KVPair;
 import com.rv007602.acmr.lib.Reducible;
 
@@ -36,17 +37,20 @@ public class FlightDistance_Reducer extends Reducible {
 					String[] split = line.split(",");
 					if (!split[0].equals(line)) {
 						String code = split[1];
-						if (code.matches("[A-Z]{3}")) {
+						if (Validate.airport(code)) {
 							String lat = split[2];
 							String lng = split[3];
 
-							if (code.equals(from)) {
-								fromPos[0] = Float.parseFloat(lat);
-								fromPos[1] = Float.parseFloat(lng);
-							} else if (code.equals(to)) {
-								toPos[0] = Float.parseFloat(lat);
-								toPos[1] = Float.parseFloat(lng);
+							if (Validate.latlng(lat) && Validate.latlng(lng)) {
+								if (code.equals(from)) {
+									fromPos[0] = Float.parseFloat(lat);
+									fromPos[1] = Float.parseFloat(lng);
+								} else if (code.equals(to)) {
+									toPos[0] = Float.parseFloat(lat);
+									toPos[1] = Float.parseFloat(lng);
+								}
 							}
+
 						}
 					}
 				}
