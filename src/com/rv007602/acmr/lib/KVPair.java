@@ -6,7 +6,8 @@ public class KVPair {
 
 	/**
 	 * Creates a new immutable KVPair.
-	 * @param key The key.
+	 *
+	 * @param key   The key.
 	 * @param value The value.
 	 */
 	public KVPair(String key, String value) {
@@ -24,6 +25,7 @@ public class KVPair {
 
 	/**
 	 * Converts the KVPair into a CSV-style string.
+	 *
 	 * @return String representation.
 	 */
 	public String toString() {

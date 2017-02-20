@@ -25,6 +25,7 @@ public class Controller {
 
 	/**
 	 * Sets the input stream for the job.
+	 *
 	 * @param input An stream from which input is read, line-by-line.
 	 */
 	public void setInput(BufferedReader input) {
@@ -33,6 +34,7 @@ public class Controller {
 
 	/**
 	 * Configures a Mappable class for multi-threaded instantiation.
+	 *
 	 * @param mapperClass A class which extends library Mappable class.
 	 */
 	public void setMapper(Class<? extends Mappable> mapperClass) {
@@ -41,6 +43,7 @@ public class Controller {
 
 	/**
 	 * Configures a Reducible class for multi-threaded instantiation.
+	 *
 	 * @param reducerClass A class which extends library Reducible class.
 	 */
 	public void setReducer(Class<? extends Reducible> reducerClass) {
@@ -62,6 +65,7 @@ public class Controller {
 
 	/**
 	 * Runs the Mappable's .map method, through a multi-threaded ExecutorService pool. Automatically uses all threads available on the machine.
+	 *
 	 * @throws NoSuchMethodException
 	 * @throws IOException
 	 * @throws IllegalAccessException
@@ -95,6 +99,7 @@ public class Controller {
 
 	/**
 	 * Runs the Reducible's .reduce method, through a multi-threaded ExecutorService pool. Automatically uses all threads available on the machine.
+	 *
 	 * @throws NoSuchMethodException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
@@ -142,6 +147,7 @@ public class Controller {
 
 	/**
 	 * Stores an output buffer to which results are written.
+	 *
 	 * @param output The output buffer.
 	 */
 	public void setOutput(BufferedWriter output) {
@@ -150,6 +156,7 @@ public class Controller {
 
 	/**
 	 * Writes an ArrayList of KVPair map results into memory for later reduction. Results are split by key into arrays.
+	 *
 	 * @param results An ArrayList of zero or more KVPairs.
 	 */
 	private void appendMapResults(ArrayList<KVPair> results) {
@@ -166,6 +173,7 @@ public class Controller {
 
 	/**
 	 * Stores reduce results in memory for later writing to disk.
+	 *
 	 * @param result A single KVPair representing a reduction result.
 	 */
 	private void appendReduceResult(KVPair result) {

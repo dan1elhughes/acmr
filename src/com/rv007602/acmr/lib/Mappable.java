@@ -8,6 +8,7 @@ public abstract class Mappable implements Callable {
 
 	/**
 	 * Converts a line of a file into zero or more KVPair objects.
+	 *
 	 * @param line A line of a file.
 	 * @return An ArrayList of zero or more KVPairs.
 	 */
@@ -15,6 +16,7 @@ public abstract class Mappable implements Callable {
 
 	/**
 	 * Internal method, sets the operated string.
+	 *
 	 * @param line A line of a file.
 	 */
 	void setInput(String line) {
@@ -23,6 +25,7 @@ public abstract class Mappable implements Callable {
 
 	/**
 	 * Implements the Callable interface for multi-threading by the controller.
+	 *
 	 * @return The return value of the user-implemented this.map
 	 */
 	@Override
