@@ -3,7 +3,9 @@ package com.rv007602.acmr.flightdetails;
 import com.rv007602.acmr.lib.KVPair;
 import com.rv007602.acmr.lib.Reducible;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FlightDetails_Reducer extends Reducible {
 	@Override
@@ -16,8 +18,22 @@ public class FlightDetails_Reducer extends Reducible {
 
 		String from = attributes[1];
 		String to = attributes[2];
-		String departed = attributes[3];
-		String duration = attributes[4];
+		String departedS = attributes[3];
+		String durationS = attributes[4];
+
+		int timestamp = Integer.parseInt(departedS, 10);
+		int duration = Integer.parseInt(durationS, 10);
+
+		Date departed = new Date((long) timestamp * 1000);
+		String departedAt = new SimpleDateFormat("HH:mm:ss, dd-MM-yyyy").format(departed);
+
+		Date arrived = new Date(departed.getTime() + (duration * 60 * 1000));
+		String arrivedAt = new SimpleDateFormat("HH:mm:ss, dd-MM-yyyy").format(arrived);
+
+		int hours = duration / 60;
+		int minutes = duration % 60;
+
+		String durationOfFlight = String.format("%d hours and %d minutes", hours, minutes);
 
 		ArrayList<String> passengers = new ArrayList<>();
 
@@ -25,15 +41,21 @@ public class FlightDetails_Reducer extends Reducible {
 			passengers.add(value.split(",")[0]);
 		}
 
-		String passengerS = String.join(", ", passengers);
+		String passengerS = String.join("\n\t", passengers);
 		String val = "";
 
 		try {
-			val = String.format(" from %s to %s\nDeparted: %s\nArrived: %s\nPassengers: %s\n\n",
+			val = String.format(
+					" from %s to %s\n" +
+					"Departed: %s (GMT)\n" +
+					"Arrived: %s (GMT)\n" +
+					"Duration: %s\n" +
+					"Passengers: \n\t%s\n\n",
 					from,
 					to,
-					departed,
-					duration,
+					departedAt,
+					arrivedAt,
+					durationOfFlight,
 					passengerS);
 		} catch (Exception e) {
 			e.printStackTrace();
