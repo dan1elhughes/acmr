@@ -10,31 +10,70 @@ public class Validate {
 	private static final String VALID_AIRPORTNAME = "[A-Z]{3,20}";
 	private static final String VALID_LATLNG = "-?\\d+\\.\\d+";
 
+	private static void failed(String input, String context) {
+		System.out.println(String.format("'%s' failed validation for %s", input, context));
+	}
+
 	public static boolean flight(String input) {
-		return input.matches(VALID_FLIGHT);
+		if (input.matches(VALID_FLIGHT)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_FLIGHT");
+			return false;
+		}
 	}
 
 	public static boolean airport(String input) {
-		return input.matches(VALID_AIRPORT);
+		if (input.matches(VALID_AIRPORT)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_AIRPORT");
+			return false;
+		}
 	}
 
 	public static boolean passenger(String input) {
-		return input.matches(VALID_PASSENGER);
+		if (input.matches(VALID_PASSENGER)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_PASSENGER");
+			return false;
+		}
 	}
 
 	public static boolean time(String input) {
-		return input.matches(VALID_TIME);
+		if (input.matches(VALID_TIME)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_TIME");
+			return false;
+		}
 	}
 
 	public static boolean duration(String input) {
-		return input.matches(VALID_DURATION);
+		if (input.matches(VALID_DURATION)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_DURATION");
+			return false;
+		}
 	}
 
 	public static boolean airport_name(String input) {
-		return input.matches(VALID_AIRPORTNAME);
+		if (input.matches(VALID_AIRPORTNAME)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_AIRPORTNAME");
+			return false;
+		}
 	}
 
 	public static boolean latlng(String input) {
-		return input.matches(VALID_LATLNG);
+		if (input.matches(VALID_LATLNG)) {
+			return true;
+		} else {
+			Validate.failed(input, "VALID_LATLNG");
+			return false;
+		}
 	}
 }

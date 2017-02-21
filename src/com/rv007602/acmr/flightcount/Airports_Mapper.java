@@ -22,8 +22,6 @@ public class Airports_Mapper extends Mappable {
 
 			if (Validate.airport(code)) {
 				results.add(new KVPair(code, String.valueOf(0)));
-			} else {
-				System.out.println(code);
 			}
 		}
 
