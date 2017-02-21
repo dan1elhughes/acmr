@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 public abstract class Reducible implements Callable {
 	private String key;
 	private ArrayList<String> values;
+	private boolean verbose;
 
 	/**
 	 * Converts a line of a file into zero or more KVPair objects.
@@ -34,7 +35,14 @@ public abstract class Reducible implements Callable {
 	 */
 	@Override
 	public KVPair call() {
-		System.out.println("Reduce { " + this.key + " , " + values.size() + " values } :: " + Thread.currentThread().getName());
+		if (this.verbose) {
+			System.out.println("Reduce { " + this.key + " , " + values.size() + " values } :: " + Thread.currentThread().getName());
+		}
+
 		return this.reduce(this.key, this.values);
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
 	}
 }

@@ -22,6 +22,15 @@ public class Controller {
 	private Class<? extends Reducible> reducerClass;
 	private BufferedReader input;
 	private BufferedWriter output;
+	private boolean verbose;
+
+	public Controller() {
+		this(false);
+	}
+
+	public Controller(boolean verbose) {
+		this.verbose = verbose;
+	}
 
 	/**
 	 * Sets the input stream for the job.
@@ -86,6 +95,7 @@ public class Controller {
 		while ((line = input.readLine()) != null) {
 			Mappable mapper = (Mappable) constructor.newInstance();
 			mapper.setInput(line);
+			mapper.setVerbose(this.verbose);
 			Future f = pool.submit(mapper);
 			set.add(f);
 		}
@@ -117,6 +127,7 @@ public class Controller {
 		for (HashMap.Entry<String, ArrayList<String>> entry : this.mapResults.entrySet()) {
 			Reducible reducer = (Reducible) constructor.newInstance();
 			reducer.setData(entry.getKey(), entry.getValue());
+			reducer.setVerbose(this.verbose);
 
 			Future f = pool.submit(reducer);
 			set.add(f);

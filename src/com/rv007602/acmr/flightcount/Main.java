@@ -37,7 +37,7 @@ class Main {
 		controller.setMapper(Flights_Mapper.class);
 		controller.setReducer(Flights_Reducer.class);
 
-		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data_no_error.csv"));
+		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data.csv"));
 		BufferedWriter output = new BufferedWriter(new FileWriter("output/flightcount.txt", true));
 		controller.setInput(input);
 		controller.setOutput(output);

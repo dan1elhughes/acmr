@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 
 public abstract class Mappable implements Callable {
 	private String line;
+	private boolean verbose;
 
 	/**
 	 * Converts a line of a file into zero or more KVPair objects.
@@ -30,7 +31,13 @@ public abstract class Mappable implements Callable {
 	 */
 	@Override
 	public ArrayList<KVPair> call() {
-		System.out.println("Map { " + this.line + " } :: " + Thread.currentThread().getName());
+		if (this.verbose) {
+			System.out.println("Map { " + this.line + " } :: " + Thread.currentThread().getName());
+		}
 		return this.map(this.line);
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
 	}
 }
