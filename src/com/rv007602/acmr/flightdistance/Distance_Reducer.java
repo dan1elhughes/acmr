@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FlightDistance_Reducer extends Reducible {
+public class Distance_Reducer extends Reducible {
 	@Override
 	protected KVPair reduce(String key, ArrayList<String> values) {
 		// Generic method to convert from/to airport codes to total nautical miles.
