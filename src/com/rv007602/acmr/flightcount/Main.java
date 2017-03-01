@@ -23,7 +23,7 @@ class Main {
 		controller.setReducer(Airports_Reducer.class);
 
 		BufferedReader input = new BufferedReader(new FileReader("input/Top30_airports_LatLong.csv"));
-		BufferedWriter output = new BufferedWriter(new FileWriter("output/flightcount.txt"));
+		BufferedWriter output = new BufferedWriter(new FileWriter("output/tmp.flightcount.txt"));
 		controller.setInput(input);
 		controller.setOutput(output);
 
@@ -38,7 +38,7 @@ class Main {
 		controller.setReducer(Flights_Reducer.class);
 
 		BufferedReader input = new BufferedReader(new FileReader("input/AComp_Passenger_data.csv"));
-		BufferedWriter output = new BufferedWriter(new FileWriter("output/flightcount.txt", true));
+		BufferedWriter output = new BufferedWriter(new FileWriter("output/tmp.flightcount.txt", true));
 		controller.setInput(input);
 		controller.setOutput(output);
 
@@ -52,8 +52,8 @@ class Main {
 		controller.setMapper(Totals_Mapper.class);
 		controller.setReducer(Totals_Reducer.class);
 
-		BufferedReader input = new BufferedReader(new FileReader("output/flightcount.txt"));
-		BufferedWriter output = new BufferedWriter(new FileWriter("output/flightcount-total.txt"));
+		BufferedReader input = new BufferedReader(new FileReader("output/tmp.flightcount.txt"));
+		BufferedWriter output = new BufferedWriter(new FileWriter("output/flightcount.txt"));
 		controller.setInput(input);
 		controller.setOutput(output);
 
